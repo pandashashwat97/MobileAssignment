@@ -6,21 +6,27 @@
 //
 
 import Foundation
-
+import SwiftData
+import SwiftUI
 
 class ContentViewModel : ObservableObject {
     
     private let apiService = ApiService()
     @Published var navigateDetail: DeviceData? = nil
     @Published var data: [DeviceData]? = []
-
+    var modelContext: ModelContext
+    @Query var listData: [DeviceSwiftData]
+    
     func fetchAPI() {
-        apiService.fetchDeviceDetails(completion: { item in
+        apiService.fetchDeviceDetails(modelContext: modelContext, completion: { item in
             self.data = item
         })
+        
     }
     
-    func navigateToDetail(navigateDetail: DeviceData) {
-        self.navigateDetail = navigateDetail
+    func navigateToDetail(navigateDetail: DeviceSwiftData) {
+        DispatchQueue.main.async{
+            self.navigateDetail = navigateDetail
+        }
     }
 }

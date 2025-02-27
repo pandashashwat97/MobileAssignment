@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct DevicesList: View {
-    let devices: [DeviceData]
-    let onSelect: (DeviceData) -> Void // Callback for item selection
+    let devices: [DeviceSwiftData]
+    let onSelect: (DeviceSwiftData) -> Void // Callback for item selection
 
     var body: some View {
         List(devices) { device in
@@ -17,7 +17,7 @@ struct DevicesList: View {
                 onSelect(device)
             } label: {
                 VStack(alignment: .leading) {
-                    AssignmentText(text: device.name)
+                    AssignmentText(text: device.deviceName)
                 }
             }
         }

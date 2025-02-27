@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    private var viewModel = ContentViewModel()
-    @State private var path: [DeviceData] = [] // Navigation path
-
+    @ObservedObject var viewModel = ContentViewModel()
+    @State private var path: [DeviceSwiftData] = [] // Navigation path\
+    @Environment(\.modelContext) var modelContext
+    @Query var listData: [DeviceSwiftData]
+    
     var body: some View {
         NavigationStack(path: $path) {
             Group {
@@ -37,6 +40,9 @@ struct ContentView: View {
                         path.append(navigate!)
                     }
                 }
+            }
+            .task {
+                viewModel.fetchAPI()
             }
         }
     }
