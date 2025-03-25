@@ -6,23 +6,7 @@
 //
 
 import Foundation
-import SwiftData
 
-@Model
-final class DeviceSwiftData {
-    let deviceName: String
-    let capacity: String
-    
-    init(deviceName: String, capacity: String) {
-        self.deviceName = deviceName
-        self.capacity = capacity
-    }
-    
-    convenience init(requiredData: DeviceData) {
-        self.init(deviceName: requiredData.name,
-                  capacity: requiredData.data?.capacity ?? "")
-    }
-}
 
 // MARK: - ComputerItem
 struct DeviceData: Decodable, Identifiable, Hashable, Equatable {
